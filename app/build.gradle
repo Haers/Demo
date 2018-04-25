@@ -24,7 +24,13 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
     compile 'com.android.support:appcompat-v7:26.+'
     testCompile 'junit:junit:4.12'
     compile project(':FAB_lib')
+    compile 'org.jsoup:jsoup:1.11.3'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.2.0'
+    compile 'com.zhy:okhttputils:2.5.2'
+    compile 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 }
