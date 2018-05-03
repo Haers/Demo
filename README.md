@@ -1,4 +1,4 @@
-  # Demo
+   # Demo
 ### 包定义  
 ### 服务器返回数据格式  
 {  
@@ -29,8 +29,8 @@ String stuNum; //学号
 String name; //昵称  
 String defaultLocation; //默认送货地址  
 bool gender; //性别  
-String telephone; //手机号
-String pay; //支付二维码  
+String telephone; //手机号  
+String pay; //支付二维码  
 ### 向服务器请求数据参数
 1: 请求消息  
 2: 请求更新  
