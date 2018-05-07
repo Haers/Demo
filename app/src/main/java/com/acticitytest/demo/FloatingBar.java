@@ -39,7 +39,7 @@ public class FloatingBar extends AppCompatActivity {
     }
     @SuppressWarnings("deprecation")
     private void initActionBar() {
-        if (getSupportActionBar() != null) {
+        if (getSupportActionBar()    != null) {
             ActionBar actionBar = getSupportActionBar();
             actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
             actionBar.addTab(actionBar.newTab()
