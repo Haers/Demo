@@ -1,4 +1,4 @@
-package com.neu.mobileshop.activity;
+package com.acticitytest.demo;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -17,8 +17,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.neu.mobileshop.R;
-import com.neu.mobileshop.util.NetworkUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.BitmapCallback;
 import com.zhy.http.okhttp.cookie.CookieJarImpl;
@@ -94,7 +92,8 @@ public class LoginActivity extends AppCompatActivity {
 
     public void getCodeImage(OkHttpClient client){
         OkHttpUtils.initClient(client);
-        if (NetworkUtils.isNetworkAvailable(this)) {
+      //  if (NetworkUtils.isNetworkAvailable(this))
+        {
 
             OkHttpUtils.get().url("https://zhjw.neu.edu.cn/ACTIONVALIDATERANDOMPICTURE.APPPROCESS")
                     .build().execute(new BitmapCallback() {
@@ -110,10 +109,11 @@ public class LoginActivity extends AppCompatActivity {
                     codeImage.setImageBitmap(response);
                 }
             });
-        } else {
+        }
+        /*else {
             Toast.makeText(LoginActivity.this, "Network is not available.",
                     Toast.LENGTH_SHORT).show();
-        }
+        }*/
     }
 
     public void loginWeb(String userNo, String password, String check){

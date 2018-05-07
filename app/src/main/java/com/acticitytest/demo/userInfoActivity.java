@@ -1,4 +1,4 @@
-package com.neu.mobileshop.activity;
+package com.acticitytest.demo;
 
 import android.Manifest;
 import android.content.Context;
@@ -15,9 +15,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import com.acker.simplezxing.activity.CaptureActivity;
 
-import com.neu.mobileshop.R;
 
 public class userInfoActivity extends AppCompatActivity {
     ImageView payCode ;
@@ -100,9 +98,8 @@ private Context context;
                     }
                 }
                 break;
-            case CaptureActivity.REQ_CODE:
 
-                break;
+
         }
     }
 
