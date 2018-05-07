@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
   <display-name>alpha5</display-name>
@@ -105,4 +106,113 @@
   	<servlet-name>MessageGetServlet</servlet-name>
   	<url-pattern>/servlet/MessageGetServlet</url-pattern>
   </servlet-mapping>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>alpha5</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>UserAddServlet</servlet-name>
+    <servlet-class>com.zgj.servlet.UserAddServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserAddServlet</servlet-name>
+    <url-pattern>/servlet/UserAddServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>UserGetServlet</servlet-name>
+    <servlet-class>com.zgj.servlet.UserGetServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserGetServlet</servlet-name>
+    <url-pattern>/servlet/UserGetServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>UserModifyServlet</servlet-name>
+    <servlet-class>com.zgj.servlet.UserModifyServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserModifyServlet</servlet-name>
+    <url-pattern>/servlet/UserModifyServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>MessageAddServlet</servlet-name>
+    <servlet-class>com.zgj.servlet.MessageAddServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MessageAddServlet</servlet-name>
+    <url-pattern>/servlet/MessageAddServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>MessageModifyServlet</servlet-name>
+    <servlet-class>com.zgj.servlet.MessageModifyServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MessageModifyServlet</servlet-name>
+    <url-pattern>/servlet/MessageModifyServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>MessageCaughtServlet</servlet-name>
+    <servlet-class>com.zgj.servlet.MessageCaughtServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MessageCaughtServlet</servlet-name>
+    <url-pattern>/servlet/MessageCaughtServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>MessageUncatchServlet</servlet-name>
+    <servlet-class>com.zgj.servlet.MessageUncatchServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MessageUncatchServlet</servlet-name>
+    <url-pattern>/servlet/MessageUncatchServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>MessageDoneServlet</servlet-name>
+    <servlet-class>com.zgj.servlet.MessageDoneServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MessageDoneServlet</servlet-name>
+    <url-pattern>/servlet/MessageDoneServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>MessageDeleteServlet</servlet-name>
+    <servlet-class>com.zgj.servlet.MessageDeleteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MessageDeleteServlet</servlet-name>
+    <url-pattern>/servlet/MessageDeleteServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>MessageGetByReceiverServlet</servlet-name>
+    <servlet-class>com.zgj.servlet.MessageGetByReceiverServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MessageGetByReceiverServlet</servlet-name>
+    <url-pattern>/servlet/MessageGetyByReceiverServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>MessageGetBySenderServlet</servlet-name>
+    <servlet-class>com.zgj.servlet.MessageGetBySenderServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MessageGetBySenderServlet</servlet-name>
+    <url-pattern>/servlet/MessageGetBySenderServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>MessageGetServlet</servlet-name>
+  	<servlet-class>com.zgj.servlet.MessageGetServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>MessageGetServlet</servlet-name>
+  	<url-pattern>/servlet/MessageGetServlet</url-pattern>
+  </servlet-mapping>
+>>>>>>> a244db9743e1a09607ddde6efe917c91a0ead07b
 </web-app>
