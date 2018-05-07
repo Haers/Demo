@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/logo"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"/>
+
+    <EditText
+        android:id="@+id/Name"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:hint="昵称："
+        android:layout_below="@id/logo"
+        android:layout_marginTop="50dp"
+        android:text=""  />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/sex_rg"
+        android:layout_below="@id/logo"
+        android:layout_marginTop="55dp"
+        android:orientation="horizontal"
+        android:layout_marginLeft="220dp">
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="男"
+            android:id="@+id/male_rb"/>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="女"
+            android:id="@+id/famale_rb"/>
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/defaultLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="默认送货地址："
+        android:layout_below="@id/Name"
+        android:layout_marginTop="10dp"
+        android:text=""  />
+
+    <EditText
+        android:id="@+id/telephone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="手机号码："
+        android:layout_below="@id/defaultLocation"
+        android:layout_marginTop="10dp"
+        android:text=""  />
+
+    <ImageView
+        android:id="@+id/pay"
+        android:layout_width="172dp"
+        android:layout_height="168dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="48dp"
+        android:layout_marginStart="23dp"
+         />
+
+    <Button
+        android:id="@+id/choosePayCode"
+        android:layout_width="137dp"
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="144dp"
+        android:layout_marginEnd="16dp"
+        android:text="从相册选取二维码"
+        android:textColor="#fff" />
+
+    <Button
+        android:id="@+id/change_ok"
+        android:layout_width="137dp"
+        android:layout_height="45dp"
+        android:layout_alignBottom="@id/pay"
+        android:layout_alignStart="@id/choosePayCode"
+        android:text="OK"
+        android:textColor="#fff" />
+
+</RelativeLayout>
