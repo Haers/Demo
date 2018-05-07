@@ -1,7 +1,7 @@
 package com.acticitytest.demo.http;
 import android.util.Log;
 
-import com.acticitytest.demo.entity.HttpResult;
+import com.acticitytest.demo.entity.HttpResult; 
 import com.acticitytest.demo.service.MessageService;
 
 import rx.Observable;
