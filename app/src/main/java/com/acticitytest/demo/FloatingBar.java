@@ -167,6 +167,13 @@ public class FloatingBar extends AppCompatActivity {
                     Log.d("ListViewFragment", "onScroll()");
                 }
             });
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent=new Intent("android.intent.action.EDIT_MESSAGE");
+                    startActivity(intent);
+                }
+            });
 
             return root;
         }
