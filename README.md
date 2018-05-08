@@ -1,6 +1,13 @@
    # Demo
 ### 包定义  
-### 服务器返回数据格式  
+activity: 活动  
+view: 界面  
+adapter: 适配器  
+entity: 实体类  
+http: 网络  
+service: 服务  
+presenter: 逻辑处理（MVP模式）  
+### 服务器返回数据格式  
 {  
 &emsp;status:  
 &emsp;type:  
