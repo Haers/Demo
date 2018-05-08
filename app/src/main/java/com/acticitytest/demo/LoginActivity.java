@@ -4,6 +4,7 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -65,6 +66,15 @@ public class LoginActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         initClient();
         getCodeImage(okHttpClient);
+
+        Button button=(Button)findViewById(R.id.login);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(LoginActivity.this,FloatingBar.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @OnClick({R.id.refresh, R.id.login})
