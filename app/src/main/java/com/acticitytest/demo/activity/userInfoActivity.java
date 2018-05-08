@@ -1,4 +1,4 @@
-package com.acticitytest.demo;
+package com.acticitytest.demo.activity;
 
 import android.Manifest;
 import android.content.Context;
@@ -15,6 +15,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import com.acticitytest.demo.R;
 
 
 public class userInfoActivity extends AppCompatActivity {

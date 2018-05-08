@@ -1,4 +1,4 @@
-package com.acticitytest.demo;
+package com.acticitytest.demo.activity;
 
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.acticitytest.demo.R;
 
 public class ItemActivity extends AppCompatActivity {
 

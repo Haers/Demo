@@ -1,4 +1,4 @@
-package com.acticitytest.demo;
+package com.acticitytest.demo.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.acticitytest.demo.R;
 
 public class ListViewAdapter extends BaseAdapter {
     private final Context mContext;

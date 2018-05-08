@@ -1,7 +1,9 @@
-package com.acticitytest.demo;
+package com.acticitytest.demo.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.acticitytest.demo.R;
 
 public class EditActivity extends AppCompatActivity {
 

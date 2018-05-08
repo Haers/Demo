@@ -1,15 +1,10 @@
-package com.acticitytest.demo;
+package com.acticitytest.demo.activity;
 
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -18,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.acticitytest.demo.R;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.BitmapCallback;
 import com.zhy.http.okhttp.cookie.CookieJarImpl;
@@ -67,11 +63,11 @@ public class LoginActivity extends AppCompatActivity {
         initClient();
         getCodeImage(okHttpClient);
 
-        Button button=(Button)findViewById(R.id.login);
+        Button button=findViewById(R.id.login);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(LoginActivity.this,FloatingBar.class);
+                Intent intent=new Intent(LoginActivity.this, FloatingBar.class);
                 startActivity(intent);
             }
         });

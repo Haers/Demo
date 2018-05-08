@@ -1,4 +1,4 @@
-package com.acticitytest.demo;
+package com.acticitytest.demo.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
