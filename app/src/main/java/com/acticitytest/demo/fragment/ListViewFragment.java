@@ -61,7 +61,6 @@ public class ListViewFragment extends Fragment {
                         Intent intent=new Intent("android.intent.action.NEW_VIEW");
                         intent.putExtras(bundle);
                         startActivity(intent);
-
                     }
                 });
 
