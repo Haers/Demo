@@ -52,4 +52,9 @@
         android:text="提交"
         android:layout_gravity="right"
         />
+    <TextView
+        android:id="@+id/edit_activity_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/search"/>
 </LinearLayout>

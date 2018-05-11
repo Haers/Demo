@@ -11,42 +11,66 @@ import android.widget.TextView;
 
 import com.acticitytest.demo.R;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class ItemActivity extends AppCompatActivity {
 
+    @BindView(R.id.help)
+    Button help;
+    @BindView(R.id.itemPic)
+    ImageView itemPic;
+    @BindView(R.id.item_sender_id)
+    TextView sender_id;
+    @BindView(R.id.item_send_time)
+    TextView send_time;
+    @BindView(R.id.item_send_message)
+    TextView send_message;
+    @BindView(R.id.item_fetch_location)
+    TextView fetch_location;
+    @BindView(R.id.item_send_location)
+    TextView send_location;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item);
-
+        ButterKnife.bind(this);
         Bundle bundle=getIntent().getExtras();
         int picId=bundle.getInt("picId");
-        String countryName=bundle.getString("countryName");
-        ImageView imageView=(ImageView)findViewById(R.id.itemPic);
-        imageView.setImageResource(picId);
-        TextView textView=(TextView)findViewById(R.id.itemName);
-        textView.setText(countryName);
+        itemPic.setImageResource(picId);
+        String senderId = bundle.getString("senderId");
+        String sendDate = bundle.getString("sendDate");
+        String sendTime = bundle.getString("sendTime");
+        String Time = sendDate + "-" + sendTime;
+        String msg = bundle.getString("msg");
+        String fetchLocation = bundle.getString("fetchLocation");
+        String sendLocation = bundle.getString("sendLocation");
+        sender_id.setText(senderId);
+        send_time.setText(Time);
+        send_message.setText(msg);
+        fetch_location.setText(fetchLocation);
+        send_location.setText(sendLocation);
+    }
 
-        Button button=(Button)findViewById(R.id.help);
-        button.setOnClickListener(new View.OnClickListener() {
+    @OnClick(R.id.help)
+    public void onClick(View view) {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(ItemActivity.this);
+        dialog.setMessage("确定帮助？");
+        dialog.setCancelable(false);
+        dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                AlertDialog.Builder dialog=new AlertDialog.Builder(ItemActivity.this);
-                dialog.setMessage("确定帮助？");
-                dialog.setCancelable(false);
-                dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+            public void onClick(DialogInterface dialog, int which) {
 
-                    }
-                });
-                dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-                dialog.show();
             }
         });
+        dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        dialog.show();
     }
+
 }

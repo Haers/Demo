@@ -35,7 +35,6 @@
         <activity android:name=".activity.ItemActivity">
             <intent-filter>
                 <action android:name="android.intent.action.NEW_VIEW" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -43,8 +42,8 @@
             android:name=".activity.EditActivity"
             android:label="@string/title_activity_edit">
             <intent-filter>
-                <action android:name="android.intent.action.EDIT_MESSAGE"></action>
-                <category android:name="android.intent.category.DEFAULT"></category>
+                <action android:name="android.intent.action.EDIT_MESSAGE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
         <activity android:name=".activity.userInfoActivity">

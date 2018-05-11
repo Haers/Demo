@@ -1,18 +1,23 @@
 package com.acticitytest.demo.entity;
 
 public class HttpResult<T> {
-    private  int status;
-    private String msg;
+    private int status;
+    private int type;
+    private String info;
     private T data;
 
-    public String getMsg() {
-        return msg;
+    public int getType(int type){
+        return type;
     }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public void setType(int type){
+        this.type = type;
     }
-
+    public String getInfo(){
+        return info;
+    }
+    public void setInfo(String info){
+        this.info = info;
+    }
     public T getData() {
         return data;
     }
@@ -33,7 +38,7 @@ public class HttpResult<T> {
     @Override
     public String toString() {
         StringBuffer sb = new StringBuffer();
-        sb.append("status="+status+",msg="+msg);
+        sb.append("status="+status+",msg="+info);
         if(null != data){
             sb.append(",data="+data.toString());
         }

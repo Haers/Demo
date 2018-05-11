@@ -39,22 +39,25 @@ public class ListViewAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.list_item, parent, false);
             viewHolder = new ViewHolder();
-            viewHolder.mTextView = (TextView) convertView.findViewById(android.R.id.text1);
+            viewHolder.mTextView = convertView.findViewById(android.R.id.text1);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        String[] values = mDataset[position].split(",");
+        /*String[] values = mDataset[position].split(",");
         String countryName = values[0];
-        int flagResId = mContext.getResources().getIdentifier(values[1], "drawable", mContext.getPackageName());
+        int flagResId = mContext.getResources().getIdentifier(values[1],
+                "drawable", mContext.getPackageName());
         viewHolder.mTextView.setText(countryName);
-        viewHolder.mTextView.setCompoundDrawablesWithIntrinsicBounds(flagResId, 0, 0, 0);
+        viewHolder.mTextView.setCompoundDrawablesWithIntrinsicBounds(flagResId, 0, 0, 0);*/
+        String value = mDataset[position];
+        viewHolder.mTextView.setText(value);
 
         return convertView;
     }
 
     private static class ViewHolder {
-        public TextView mTextView;
+        private TextView mTextView;
     }
 }

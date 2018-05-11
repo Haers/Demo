@@ -17,7 +17,7 @@ import com.acticitytest.demo.entity.HttpResult;
 import com.acticitytest.demo.http.service.MessageService;
 
 public class HttpMethods {
-    protected static final String BASE_URL = "http://118.202.1.226:8080/";
+    protected static final String BASE_URL = "http://39.107.243.59:8080/";
     private static final int DEFAULT_TIMEOUT = 5;
     protected static final String TAG = "HttpMethods";
     private Retrofit retrofit;
@@ -56,7 +56,7 @@ public class HttpMethods {
         @Override
         public T call(HttpResult<T> httpResult){
             Log.i(TAG,"status:"+httpResult.getStatus());
-            Log.i(TAG,"msg:"+httpResult.getMsg());
+            Log.i(TAG,"info:"+httpResult.getInfo());
             Log.i(TAG,"data:"+httpResult.getData());
             T data = httpResult.getData();
             Log.e("help me", data.toString());

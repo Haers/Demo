@@ -1,31 +1,26 @@
 package com.acticitytest.demo.activity;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AbsListView;
-import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.TextView;
-
 import com.acticitytest.demo.R;
-import com.acticitytest.demo.adapter.ListViewAdapter;
-import com.melnykov.fab.FloatingActionButton;
-import com.melnykov.fab.ScrollDirectionListener;
+import com.acticitytest.demo.entity.Message;
+import com.acticitytest.demo.fragment.ListViewFragment;
+import com.acticitytest.demo.http.HttpMethods;
+import com.acticitytest.demo.http.ProgressSubscriber;
+import com.acticitytest.demo.http.SubscriberOnNextListener;
+import com.acticitytest.demo.http.presenter.MessagePresenter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FloatingBar extends AppCompatActivity {
 
@@ -36,11 +31,10 @@ public class FloatingBar extends AppCompatActivity {
         FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
         fragmentTransaction.replace(android.R.id.content,new ListViewFragment());*/
         initActionBar();
-
     }
    @SuppressWarnings("deprecation")
     private void initActionBar() {
-        if (getSupportActionBar()    != null) {
+        if (getSupportActionBar() != null) {
             ActionBar actionBar = getSupportActionBar();
             actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
             actionBar.hide();
@@ -48,7 +42,8 @@ public class FloatingBar extends AppCompatActivity {
                     .setTabListener(new ActionBar.TabListener() {
                         @Override
                         public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-                            fragmentTransaction.replace(android.R.id.content, new ListViewFragment());
+                            ListViewFragment listViewFragment = new ListViewFragment();
+                            fragmentTransaction.replace(android.R.id.content, listViewFragment);
                         }
 
                         @Override
@@ -88,64 +83,5 @@ public class FloatingBar extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public static class ListViewFragment extends Fragment {
-
-        @SuppressLint("InflateParams")
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            View root = inflater.inflate(R.layout.fragment_listview, container, false);
-
-            final String countries[]=getResources().getStringArray(R.array.countries);
-            ListView list = (ListView) root.findViewById(android.R.id.list);
-            ListViewAdapter listAdapter = new ListViewAdapter(getActivity(),
-                    countries);
-            list.setAdapter(listAdapter);
-            list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    String value[]=countries[position].split(",");
-                    int picId=getActivity().getResources().getIdentifier(value[1],"drawable",getActivity().getPackageName());
-                    Bundle bundle=new Bundle();
-                    bundle.putInt("picId",picId);
-                    bundle.putString("countryName",value[0]);
-                    Intent intent=new Intent("android.intent.action.NEW_VIEW");
-                    intent.putExtras(bundle);
-                    startActivity(intent);
-                }
-            });
-
-            FloatingActionButton fab = (FloatingActionButton) root.findViewById(R.id.fab);
-            fab.attachToListView(list, new ScrollDirectionListener() {
-                @Override
-                public void onScrollDown() {
-                    Log.d("ListViewFragment", "onScrollDown()");
-                }
-
-                @Override
-                public void onScrollUp() {
-                    Log.d("ListViewFragment", "onScrollUp()");
-                }
-            }, new AbsListView.OnScrollListener() {
-                @Override
-                public void onScrollStateChanged(AbsListView view, int scrollState) {
-                    Log.d("ListViewFragment", "onScrollStateChanged()");
-                }
-
-                @Override
-                public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                    Log.d("ListViewFragment", "onScroll()");
-                }
-            });
-            fab.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent=new Intent("android.intent.action.EDIT_MESSAGE");
-                    startActivity(intent);
-                }
-            });
-
-            return root;
-        }
-    }
 }
 
