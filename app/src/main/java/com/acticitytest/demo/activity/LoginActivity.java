@@ -14,6 +14,10 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.acticitytest.demo.R;
+import com.acticitytest.demo.entity.HttpResult;
+import com.acticitytest.demo.entity.User;
+import com.acticitytest.demo.http.HttpMethods;
+import com.acticitytest.demo.http.presenter.UserPresenter;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.BitmapCallback;
 import com.zhy.http.okhttp.cookie.CookieJarImpl;
@@ -35,6 +39,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import rx.Subscriber;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -138,7 +143,10 @@ public class LoginActivity extends AppCompatActivity {
                 try{
                     Response response = okHttpClient.newCall(request).execute();
                     String responseData = response.body().string();
-                    new LoginTask(responseData, LoginActivity.this).execute();
+                    new LoginTask(responseData,
+                            LoginActivity.this,
+                            username.getText().toString())
+                            .execute();
                 }catch (Exception e){
                     Log.e("Post", e.toString());
                 }
@@ -150,10 +158,12 @@ public class LoginActivity extends AppCompatActivity {
 
         private String loginResult;
         private Context context;
+        private String stuNum;
 
-        public LoginTask(String loginResult, Context context){
+        public LoginTask(String loginResult, Context context, String stuNum){
             this.loginResult = loginResult;
             this.context = context;
+            this.stuNum = stuNum;
         }
 
         @Override
@@ -172,6 +182,25 @@ public class LoginActivity extends AppCompatActivity {
             if(result){
                 Toast.makeText(context, "登录成功！",
                         Toast.LENGTH_SHORT).show();
+                HttpMethods.getInstance();
+                UserPresenter.addUser(new Subscriber<HttpResult<User>>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(HttpResult<User> userHttpResult) {
+                        if(userHttpResult.getStatus() == 0)
+                            Toast.makeText(context, "用户数据发送成功",
+                                    Toast.LENGTH_SHORT).show();
+                    }
+                }, stuNum);
             }else{
                 Toast.makeText(context, "登录失败！请检查账号密码或验证码输入是否正确",
                         Toast.LENGTH_SHORT).show();
