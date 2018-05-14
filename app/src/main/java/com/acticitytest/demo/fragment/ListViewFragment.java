@@ -4,8 +4,14 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.media.session.MediaButtonReceiver;
+import android.support.v7.app.ActionBar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -24,14 +30,32 @@ import com.melnykov.fab.ScrollDirectionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
 public class ListViewFragment extends Fragment {
 
+    Unbinder unbinder;
+    @BindView(android.R.id.list)
+    ListView list;
+    @BindView(R.id.fab)
+    FloatingActionButton fab;
     private SubscriberOnNextListener getMessageOnNext;
 
     @SuppressLint("InflateParams")
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View root = inflater.inflate(R.layout.fragment_listview, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        final View root = inflater.inflate(R.layout.fragment_listview,
+                container, false);
+        unbinder = ButterKnife.bind(this, root);
+        return root;
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
         final ArrayList<String> msg = new ArrayList<>();
         getMessageOnNext = new SubscriberOnNextListener<List<Message>>(){
             @Override
@@ -39,7 +63,6 @@ public class ListViewFragment extends Fragment {
                 for(int i = 0; i < messages.size(); i++)
                     msg.add(messages.get(i).getMsg());
                 //final String countries[]=getResources().getStringArray(R.array.countries);
-                ListView list = root.findViewById(android.R.id.list);
                 final String[] m = msg.toArray(new String[msg.size()]);
                 //ListViewAdapter listAdapter = new ListViewAdapter(getActivity(), countries);
                 ListViewAdapter listAdapter = new ListViewAdapter(getActivity(), m);
@@ -64,16 +87,17 @@ public class ListViewFragment extends Fragment {
                     }
                 });
 
-                FloatingActionButton fab = root.findViewById(R.id.fab);
                 fab.attachToListView(list, new ScrollDirectionListener() {
                     @Override
                     public void onScrollDown() {
-                        Log.d("ListViewFragment", "onScrollDown()");
+                        Log.d("ListViewFragment",
+                                "onScrollDown()");
                     }
 
                     @Override
                     public void onScrollUp() {
-                        Log.d("ListViewFragment", "onScrollUp()");
+                        Log.d("ListViewFragment",
+                                "onScrollUp()");
                     }
                 }, new AbsListView.OnScrollListener() {
                     @Override
@@ -82,22 +106,27 @@ public class ListViewFragment extends Fragment {
                     }
 
                     @Override
-                    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                    public void onScroll(AbsListView view, int firstVisibleItem,
+                                         int visibleItemCount, int totalItemCount) {
                         Log.d("ListViewFragment", "onScroll()");
                     }
                 });
                 fab.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent=new Intent("android.intent.action.EDIT_MESSAGE");
+                        Intent intent = new Intent("android.intent.action.EDIT_MESSAGE");
                         startActivity(intent);
                     }
                 });
             }
         };
         getMessage();
+    }
 
-        return root;
+    @Override
+    public void onDestroyView(){
+        super.onDestroyView();
+        unbinder.unbind();
     }
 
     private void getMessage(){
