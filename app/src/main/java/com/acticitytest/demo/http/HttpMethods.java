@@ -15,6 +15,7 @@ import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 import com.acticitytest.demo.entity.HttpResult;
 import com.acticitytest.demo.http.service.MessageService;
+import com.acticitytest.demo.http.service.UserService;
 
 public class HttpMethods {
     protected static final String BASE_URL = "http://39.107.243.59:8080/";
@@ -23,6 +24,7 @@ public class HttpMethods {
     private Retrofit retrofit;
     private static HttpMethods mInstance;
     protected static MessageService messageService;
+    protected static UserService userService;
 
     public HttpMethods(){
         if(mInstance == null){
@@ -38,6 +40,7 @@ public class HttpMethods {
                     .client(okHttpClient)
                     .build();
             messageService = retrofit.create(MessageService.class);
+            userService = retrofit.create(UserService.class);
         }
     }
 
@@ -58,9 +61,7 @@ public class HttpMethods {
             Log.i(TAG,"status:"+httpResult.getStatus());
             Log.i(TAG,"info:"+httpResult.getInfo());
             Log.i(TAG,"data:"+httpResult.getData());
-            T data = httpResult.getData();
-            Log.e("help me", data.toString());
-            return data;
+            return httpResult.getData();
         }
     }
 

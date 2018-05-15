@@ -18,6 +18,7 @@ android:layout_height="match_parent" >
     android:layout_below="@id/logo"
     android:layout_marginTop="50dp"
     android:hint="@string/userno"
+    android:singleLine="true"
     android:text=""/>
 
 <EditText
@@ -26,7 +27,7 @@ android:layout_height="match_parent" >
     android:layout_height="wrap_content"
     android:layout_below="@id/username"
     android:hint="@string/password"
-    android:text=""
+    android:singleLine="true"
     android:inputType="textPassword" />
 
 <LinearLayout

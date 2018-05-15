@@ -4,7 +4,7 @@
     android:layout_height="match_parent" >
 
     <ImageView
-        android:id="@+id/logo"
+        android:id="@+id/info_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/logo"
@@ -13,7 +13,7 @@
         android:layout_marginTop="30dp"/>
 
     <EditText
-        android:id="@+id/Name"
+        android:id="@+id/info_name"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:hint="昵称："
@@ -24,7 +24,7 @@
     <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/sex_rg"
+        android:id="@+id/info_sex"
         android:layout_below="@id/logo"
         android:layout_marginTop="55dp"
         android:orientation="horizontal"
@@ -33,59 +33,59 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="男"
-            android:id="@+id/male_rb"/>
+            android:id="@+id/info_male"/>
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="女"
-            android:id="@+id/famale_rb"/>
+            android:id="@+id/info_female"/>
     </RadioGroup>
 
     <EditText
-        android:id="@+id/defaultLocation"
+        android:id="@+id/info_defaultLocation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="默认送货地址："
-        android:layout_below="@id/Name"
+        android:layout_below="@id/info_name"
         android:layout_marginTop="10dp"
         android:text=""  />
 
     <EditText
-        android:id="@+id/telephone"
+        android:id="@+id/info_telephone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="手机号码："
-        android:layout_below="@id/defaultLocation"
+        android:layout_below="@id/info_defaultLocation"
         android:layout_marginTop="10dp"
         android:text=""  />
 
     <ImageView
-        android:id="@+id/pay"
+        android:id="@+id/info_pay"
         android:layout_width="172dp"
         android:layout_height="168dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:layout_marginBottom="48dp"
-        android:layout_marginStart="23dp"
+        android:layout_marginRight="23dp"
          />
 
     <Button
-        android:id="@+id/choosePayCode"
+        android:id="@+id/info_choosePayCode"
         android:layout_width="137dp"
         android:layout_height="45dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_marginBottom="144dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
         android:text="从相册选取二维码"
         android:textColor="#fff" />
 
     <Button
-        android:id="@+id/change_ok"
+        android:id="@+id/info_change_ok"
         android:layout_width="137dp"
         android:layout_height="45dp"
-        android:layout_alignBottom="@id/pay"
-        android:layout_alignStart="@id/choosePayCode"
+        android:layout_alignBottom="@id/info_pay"
+        android:layout_alignLeft="@id/info_choosePayCode"
         android:text="OK"
         android:textColor="#fff" />
 

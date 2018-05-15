@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import com.acticitytest.demo.R;
 import com.acticitytest.demo.entity.HttpResult;
 import com.acticitytest.demo.entity.User;
@@ -22,14 +21,13 @@ import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.BitmapCallback;
 import com.zhy.http.okhttp.cookie.CookieJarImpl;
 import com.zhy.http.okhttp.cookie.store.MemoryCookieStore;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
+import java.net.ConnectException;
+import java.net.SocketTimeoutException;
 import java.util.concurrent.TimeUnit;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -41,11 +39,13 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import rx.Subscriber;
 
+import static android.app.ActionBar.DISPLAY_SHOW_CUSTOM;
+
 public class LoginActivity extends AppCompatActivity {
 
     private static final int DEFAULT_TIMEOUT = 5;
     private OkHttpClient okHttpClient;
-
+    public static String stuNum;
     @BindView(R.id.username)
     EditText username;
     @BindView(R.id.password)
@@ -63,28 +63,27 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-        // bind the view using butterknife
         ButterKnife.bind(this);
         initClient();
         getCodeImage(okHttpClient);
+    }
 
-        Button button=findViewById(R.id.login);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(LoginActivity.this, FloatingBar.class);
-                startActivity(intent);
-            }
-        });
+    @Override
+    protected void onStop(){
+        super.onStop();
+        finish();
     }
 
     @OnClick({R.id.refresh, R.id.login})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.login:
-                loginWeb(username.getText().toString(),
+                stuNum = username.getText().toString();
+                /*loginWeb(username.getText().toString(),
                         password.getText().toString(),
-                        check.getText().toString());
+                        check.getText().toString());*/
+                Intent intent=new Intent("android.intent.action.FLOATING_BAR");
+                startActivity(intent);
                 break;
             case R.id.refresh:
                 getCodeImage(okHttpClient);
@@ -110,7 +109,8 @@ public class LoginActivity extends AppCompatActivity {
                     .build().execute(new BitmapCallback() {
                 @Override
                 public void onError(Call call, Exception e) {
-                    Toast.makeText(LoginActivity.this, "Error occurs when download the bitmap",
+                    Toast.makeText(LoginActivity.this,
+                            "Error occurs when download the bitmap",
                             Toast.LENGTH_SHORT).show();
                 }
 
@@ -122,7 +122,7 @@ public class LoginActivity extends AppCompatActivity {
             });
         }
         /*else {
-            Toast.makeText(LoginActivity.this, "Network is not available.",
+            Toast.makeText(LoginActivity.this, "NetworkUtils is not available.",
                     Toast.LENGTH_SHORT).show();
         }*/
     }
@@ -160,7 +160,7 @@ public class LoginActivity extends AppCompatActivity {
         private Context context;
         private String stuNum;
 
-        public LoginTask(String loginResult, Context context, String stuNum){
+        LoginTask(String loginResult, Context context, String stuNum){
             this.loginResult = loginResult;
             this.context = context;
             this.stuNum = stuNum;
@@ -180,8 +180,6 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Boolean result){
             if(result){
-                Toast.makeText(context, "登录成功！",
-                        Toast.LENGTH_SHORT).show();
                 HttpMethods.getInstance();
                 UserPresenter.addUser(new Subscriber<HttpResult<User>>() {
                     @Override
@@ -191,16 +189,29 @@ public class LoginActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        if (e instanceof SocketTimeoutException) {
+                            Toast.makeText(context, "网络中断，请检查您的网络状态",
+                                    Toast.LENGTH_SHORT).show();
+                        } else if (e instanceof ConnectException) {
+                            Toast.makeText(context, "网络中断，请检查您的网络状态",
+                                    Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(context, "error:" + e.getMessage(),
+                                    Toast.LENGTH_LONG).show();
+                            Log.e("ProgressSubscriber", e.getMessage());
+                        }
                     }
 
                     @Override
                     public void onNext(HttpResult<User> userHttpResult) {
-                        if(userHttpResult.getStatus() == 0)
+                        if(userHttpResult.getStatus() == 0){
                             Toast.makeText(context, "用户数据发送成功",
                                     Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }, stuNum);
+                Intent intent=new Intent("android.intent.action.FLOATING_BAR");
+                context.startActivity(intent);
             }else{
                 Toast.makeText(context, "登录失败！请检查账号密码或验证码输入是否正确",
                         Toast.LENGTH_SHORT).show();

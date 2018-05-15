@@ -83,4 +83,10 @@
     <string name="item_send_location">送货地址：</string>
     <string name="item_help">帮助</string>
     <string name="item_send_message">消息内容：</string>
+    <string name="user_info">完善用户信息</string>
+    <string name="login_label">帮帮</string>
+    <string name="edit_msg">说点什么</string>
+    <string name="edit_fetch_location">取货地</string>
+    <string name="edit_send_location">送货地</string>
+    <string name="edit_submit">提交</string>
 </resources>

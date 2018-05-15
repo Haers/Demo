@@ -12,9 +12,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="取货地："
+            android:text="@string/edit_fetch_location"
             />
         <EditText
+            android:id="@+id/edit_fetch_location"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="4"
@@ -27,9 +28,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="送货地："
+            android:text="@string/edit_send_location"
             />
         <EditText
+            android:id="@+id/edit_send_location"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="4"
@@ -38,23 +40,19 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="说点什么："
+        android:text="@string/edit_msg"
         />
     <EditText
+        android:id="@+id/edit_msg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:maxLines="2"
         />
     <Button
-        android:id="@+id/sendMessage"
+        android:id="@+id/edit_submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="提交"
-        android:layout_gravity="right"
+        android:text="@string/edit_submit"
+        android:layout_gravity="end"
         />
-    <TextView
-        android:id="@+id/edit_activity_result"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="@string/search"/>
 </LinearLayout>
