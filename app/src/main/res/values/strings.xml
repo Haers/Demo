@@ -81,9 +81,12 @@
     <string name="item_send_time">求助时间：</string>
     <string name="item_fetch_location">取货地址：</string>
     <string name="item_send_location">送货地址：</string>
+    <string name="item_call">电话联系</string>
     <string name="item_help">帮助</string>
     <string name="item_send_message">消息内容：</string>
-    <string name="user_info">完善用户信息</string>
+    <string name="menu_user_info">完善用户信息</string>
+    <string name="menu_my_message">我的消息</string>
+    <string name="menu_my_order">我的订单</string>
     <string name="login_label">帮帮</string>
     <string name="edit_msg">说点什么</string>
     <string name="edit_fetch_location">取货地</string>

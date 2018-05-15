@@ -85,11 +85,11 @@ public class UserInfoActivity extends AppCompatActivity {
                 }
                 break;
             case R.id.info_change_ok:
-                int gender;
+                boolean gender;
                 if(sex.getCheckedRadioButtonId() == R.id.info_male)
-                    gender = 1;
+                    gender = true;
                 else
-                    gender = 0;
+                    gender = false;
                 HttpMethods.getInstance();
                 UserPresenter.modifyUser(new Subscriber<HttpResult<User>>() {
                     @Override

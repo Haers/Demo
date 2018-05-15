@@ -4,7 +4,7 @@ package com.acticitytest.demo.entity;
 public class User {
     private String stuNum;
     private String name;
-    private int gender;
+    private boolean gender;
     private String defaultLocation;
     private String telephone;
     private String pay;
@@ -25,11 +25,11 @@ public class User {
         this.name = name;
     }
 
-    public int isGender() {
+    public boolean isGender() {
         return gender;
     }
 
-    public void setGender(int gender) {
+    public void setGender(boolean gender) {
         this.gender = gender;
     }
 

@@ -76,7 +76,14 @@
                 android:layout_height="wrap_content" />
     </LinearLayout>
     <Button
-        android:id="@+id/help"
+        android:id="@+id/item_call"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:text="@string/item_call"
+        />
+    <Button
+        android:id="@+id/item_help"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"

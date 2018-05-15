@@ -7,12 +7,14 @@ import retrofit2.http.POST;
 import rx.Observable;
 import com.acticitytest.demo.entity.HttpResult;
 import com.acticitytest.demo.entity.User;
-import retrofit2.http.GET;
+
+import java.util.List;
+
 import retrofit2.http.Query;
 
 public interface UserService {
 
-    @GET("alpha5/servlet/UserAddServlet")
+    @POST("alpha5/servlet/UserAddServlet")
     Observable<HttpResult<User>> addUser(
             @Query("stuNum") String stuNum
     );
@@ -22,9 +24,15 @@ public interface UserService {
     Observable<HttpResult<User>> modifyUser(
             @Field("stuNum") String stuNum,
             @Field("name") String name,
-            @Field("gender") int gender,
+            @Field("gender") boolean gender,
             @Field("defaultLocation") String defaultLocation,
             @Field("telephone") String telephone,
             @Field("pay") String pay
+    );
+
+    @FormUrlEncoded
+    @POST("alpha5/servlet/UserGetServlet")
+    Observable<HttpResult<List<User>>> getUser(
+            @Field("stuNum") String stuNum
     );
 }

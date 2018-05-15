@@ -29,13 +29,15 @@
 
             </intent-filter>
         </activity>
-        <activity android:name=".activity.FloatingBar"
+
+        <activity android:name=".activity.MainActivity"
             android:label="消息">
             <intent-filter>
                 <action android:name="android.intent.action.FLOATING_BAR" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
         <activity android:name=".activity.ItemActivity"
             android:label="消息">
             <intent-filter>
@@ -43,6 +45,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".activity.EditActivity"
             android:label="@string/title_activity_edit">
@@ -51,12 +54,27 @@
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
+
         <activity android:name=".activity.UserInfoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.USER_INFO"/>
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
-    </application>
 
+        <activity android:name=".activity.UserMessageActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.USER_MESSAGE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".activity.UserOrderActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.USER_ORDER"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+    </application>
 </manifest>
