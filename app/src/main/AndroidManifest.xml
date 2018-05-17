@@ -55,21 +55,28 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.UserInfoActivity">
+        <activity
+            android:name=".activity.UserInfoActivity"
+            android:label="完善用户信息"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.USER_INFO"/>
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.UserMessageActivity">
+        <activity
+            android:name=".activity.UserMessageActivity"
+            android:label="我的消息">
             <intent-filter>
                 <action android:name="android.intent.action.USER_MESSAGE"/>
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.UserOrderActivity">
+        <activity
+            android:name=".activity.UserOrderActivity"
+            android:label="我的订单">
             <intent-filter>
                 <action android:name="android.intent.action.USER_ORDER"/>
                 <category android:name="android.intent.category.DEFAULT"/>
