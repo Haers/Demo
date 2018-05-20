@@ -67,7 +67,7 @@
 
         <activity
             android:name=".activity.UserMessageActivity"
-            android:label="我的消息">
+            android:label="我发布的消息">
             <intent-filter>
                 <action android:name="android.intent.action.USER_MESSAGE"/>
                 <category android:name="android.intent.category.DEFAULT"/>
@@ -76,7 +76,7 @@
 
         <activity
             android:name=".activity.UserOrderActivity"
-            android:label="我的订单">
+            android:label="我帮助的人">
             <intent-filter>
                 <action android:name="android.intent.action.USER_ORDER"/>
                 <category android:name="android.intent.category.DEFAULT"/>

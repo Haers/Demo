@@ -1,6 +1,8 @@
 package com.acticitytest.demo.activity;
 
+import android.content.DialogInterface;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -55,10 +57,26 @@ public class EditActivity extends AppCompatActivity {
 
     @OnClick(R.id.edit_submit)
     public void onClick(View view){
+        AlertDialog.Builder dialog = new AlertDialog.Builder(EditActivity.this);
+        dialog.setCancelable(false);
+        dialog.setMessage("确定发布消息？");
+        dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {}
+        });
+        dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                submitMessage();
+            }
+        });
+        dialog.show();
+    }
+
+    private void submitMessage(){
         MessagePresenter.sendMessage(new Subscriber<HttpResult<Message>>() {
             @Override
             public void onCompleted() {
-
             }
 
             @Override
@@ -78,7 +96,24 @@ public class EditActivity extends AppCompatActivity {
 
             @Override
             public void onNext(HttpResult<Message> httpResult) {
-
+                AlertDialog.Builder dialog = new AlertDialog.Builder(EditActivity.this);
+                dialog.setCancelable(false);
+                dialog.setMessage("消息发布成功，是否编辑新的消息？");
+                dialog.setNegativeButton("否", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                });
+                dialog.setPositiveButton("是", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        fetchLocation.setText("");
+                        sendLocation.setText("");
+                        msg.setText("");
+                    }
+                });
+                dialog.show();
             }
         }, LoginActivity.stuNum, msg.getText().toString(),
                 sendLocation.getText().toString(), fetchLocation.getText().toString());

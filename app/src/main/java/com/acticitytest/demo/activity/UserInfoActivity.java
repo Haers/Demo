@@ -20,16 +20,24 @@ import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.acticitytest.demo.R;
 import com.acticitytest.demo.entity.HttpResult;
 import com.acticitytest.demo.entity.User;
 import com.acticitytest.demo.http.HttpMethods;
 import com.acticitytest.demo.http.presenter.UserPresenter;
-
+import com.acticitytest.demo.utils.RGBLuminanceSource;
+import com.google.zxing.BinaryBitmap;
+import com.google.zxing.ChecksumException;
+import com.google.zxing.DecodeHintType;
+import com.google.zxing.NotFoundException;
+import com.google.zxing.Result;
+import com.google.zxing.common.HybridBinarizer;
+import com.google.zxing.qrcode.QRCodeReader;
+import com.google.zxing.FormatException;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
-
+import java.util.Hashtable;
+import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -51,7 +59,7 @@ public class UserInfoActivity extends AppCompatActivity {
     @BindView(R.id.info_telephone)
     TextView telephone;
 
-    private String pay;
+    private String pay;//支付二维码
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,8 +122,12 @@ public class UserInfoActivity extends AppCompatActivity {
 
                     @Override
                     public void onNext(HttpResult<User> userHttpResult) {
-                        Toast.makeText(UserInfoActivity.this,
-                                "用户信息已保存", Toast.LENGTH_SHORT).show();
+                        if(userHttpResult.getStatus() == 0)
+                            Toast.makeText(UserInfoActivity.this,
+                                    "用户信息已保存", Toast.LENGTH_SHORT).show();
+                        else{
+                            Log.e("info", userHttpResult.getInfo());
+                        }
                     }
                 }, LoginActivity.stuNum, name.getText().toString(), gender,
                         defaultLocation.getText().toString(),
@@ -158,17 +170,30 @@ public class UserInfoActivity extends AppCompatActivity {
                         Bitmap bit = BitmapFactory.decodeStream(
                                 this.getContentResolver().openInputStream(uri));
                         payCode.setImageBitmap(bit);
-
+                        pay = scanningImage(bit);
+                        Log.e("pay url", pay);
                     }catch(Exception e){
                         e.printStackTrace();
                     }
                 }
                 break;
-
-
         }
     }
 
+    private String scanningImage(Bitmap bitmap) {
 
-
+        Map<DecodeHintType, String> hints1 = new Hashtable<>();
+        hints1.put(DecodeHintType.CHARACTER_SET, "utf-8");
+        RGBLuminanceSource source = new RGBLuminanceSource(bitmap);
+        BinaryBitmap bitmap1 = new BinaryBitmap(new HybridBinarizer(source));
+        QRCodeReader reader = new QRCodeReader();
+        Result result;
+        try {
+            result = reader.decode(bitmap1, hints1);
+            return result.getText();
+        } catch (NotFoundException | ChecksumException | FormatException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
