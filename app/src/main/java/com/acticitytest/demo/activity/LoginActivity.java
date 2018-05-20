@@ -79,11 +79,11 @@ public class LoginActivity extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.login:
                 stuNum = username.getText().toString();
-                /*loginWeb(username.getText().toString(),
+                loginWeb(username.getText().toString(),
                         password.getText().toString(),
-                        check.getText().toString());*/
-                Intent intent=new Intent("android.intent.action.FLOATING_BAR");
-                startActivity(intent);
+                        check.getText().toString());
+                /*Intent intent=new Intent("android.intent.action.FLOATING_BAR");
+                startActivity(intent);*/
                 break;
             case R.id.refresh:
                 getCodeImage(okHttpClient);
