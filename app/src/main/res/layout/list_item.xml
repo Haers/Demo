@@ -22,5 +22,5 @@
         android:paddingTop="8dp"
         android:textColor="#212121"
         android:textSize="18sp"/>
-    
+
 </LinearLayout>
