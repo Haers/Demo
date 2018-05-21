@@ -90,17 +90,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
-            case R.id.menu_user_info:
-                Intent intent_info = new Intent("android.intent.action.USER_INFO");
-                startActivity(intent_info);
-                break;
-            case R.id.menu_my_message:
-                Intent intent_message = new Intent("android.intent.action.USER_MESSAGE");
-                startActivity(intent_message);
-                break;
-            case R.id.menu_my_order:
-                Intent intent_order = new Intent("android.intent.action.USER_ORDER");
-                startActivity(intent_order);
+            case R.id.menu_exit:
+                System.exit(0);
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -115,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onNext(final List<Message> messages){
                 for(int i = 0; i < messages.size(); i++){
-                    check.add(messages.get(i).isCaught());
+                    check.add(messages.get(i).isCaught());//检查是否接单
                     msg.add(messages.get(i).getMsg());
                 }
                 final String[] m = msg.toArray(new String[msg.size()]);

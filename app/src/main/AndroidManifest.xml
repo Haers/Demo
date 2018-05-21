@@ -83,5 +83,13 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".activity.PayActivity"
+            android:label="支付">
+            <intent-filter>
+                <action android:name="android.intent.action.PAY"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
     </application>
 </manifest>

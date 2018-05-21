@@ -225,7 +225,10 @@ public class ItemActivity extends AppCompatActivity {
             public void onNext(List<User> user) {
                 switch (listener){
                     case BUTTON_PAY:
-                        openInWeb(user.get(0).getPay());
+                        //openInWeb(user.get(0).getPay());
+                        Intent intentPay = new Intent("android.intent.action.PAY");
+                        intentPay.putExtra("payUrl", user.get(0).getPay());
+                        startActivity(intentPay);
                         break;
                     case BUTTON_CALL:
                         try{
