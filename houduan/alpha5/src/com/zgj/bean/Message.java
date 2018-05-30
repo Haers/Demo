@@ -1,7 +1,7 @@
 package com.zgj.bean;
 
 import java.sql.Time;
-import java.util.Date;
+import java.sql.Date;
 
 /**
  * Message entity. @author MyEclipse Persistence Tools
