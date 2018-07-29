@@ -9,6 +9,8 @@ public class Message {
     private String msg;
     private String fetchLocation;
     private String sendLocation;
+    private String good;
+    private float price;
     private boolean isCaught;
     private String receiverId;
     private boolean isDone;
@@ -69,6 +71,14 @@ public class Message {
     public void setSendLocation(String sendLocation){
         this.sendLocation = sendLocation;
     }
+
+    public String getGood(){ return good; }
+
+    public void setGood(String good){ this.good = good; }
+
+    public float getPrice(){ return price; }
+
+    public void setPrice(float price){ this.price = price; }
 
     public boolean isCaught(){
         return isCaught;

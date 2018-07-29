@@ -41,13 +41,13 @@ public class ListViewAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.list_item, parent, false);
             viewHolder = new ViewHolder();
+            viewHolder.image = convertView.findViewById(R.id.list_image);
             viewHolder.imageView = convertView.findViewById(R.id.list_check);
             viewHolder.mTextView = convertView.findViewById(android.R.id.text1);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-
         /*String[] values = mDataset[position].split(",");
         String countryName = values[0];
         int flagResId = mContext.getResources().getIdentifier(values[1],
@@ -61,11 +61,20 @@ public class ListViewAdapter extends BaseAdapter {
             viewHolder.imageView.setImageResource(R.drawable.check);
         else
             viewHolder.imageView.setImageResource(R.drawable.question);
+        switch (position%2){
+            case 0:
+                viewHolder.image.setImageResource(R.drawable.user1);
+                break;
+            case 1:
+                viewHolder.image.setImageResource(R.drawable.user2);
+                break;
+        }
         return convertView;
     }
 
     private static class ViewHolder {
         private ImageView imageView;
+        private ImageView image;
         private TextView mTextView;
     }
 }

@@ -18,7 +18,7 @@ import com.acticitytest.demo.http.service.MessageService;
 import com.acticitytest.demo.http.service.UserService;
 
 public class HttpMethods {
-    protected static final String BASE_URL = "http://39.107.243.59:8080/";
+    protected static final String BASE_URL = "http://120.78.209.114:8080/";
     private static final int DEFAULT_TIMEOUT = 5;
     protected static final String TAG = "HttpMethods";
     private Retrofit retrofit;
