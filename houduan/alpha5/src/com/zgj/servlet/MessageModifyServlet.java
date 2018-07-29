@@ -1,9 +1,8 @@
-<<<<<<< HEAD
 package com.zgj.servlet;
 
-//ĞŞ¸ÄÄ³ÌõÏûÏ¢
-//ËùĞè²ÎÊı:id,
-//¿ÉÑ¡²ÎÊı:msg,fetchLocation,sendLocation
+//ï¿½Ş¸ï¿½Ä³ï¿½ï¿½ï¿½ï¿½Ï¢
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½:id,
+//ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½:msg,fetchLocation,sendLocation
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.PropertyConfigurator;
 import org.hibernate.Session;
 import org.json.simple.JSONObject;
 
@@ -72,7 +72,7 @@ public class MessageModifyServlet extends HttpServlet {
 					obj.put("status", 1);
 					obj.put("type", 3);
 					obj.put("data", null);
-					obj.put("info", "Î´²éÑ¯µ½´ËÏûÏ¢");
+					obj.put("info", "æœªæŸ¥åˆ°æ­¤æ¶ˆæ¯");
 				}
 				
 				session.getTransaction().commit();
@@ -83,7 +83,7 @@ public class MessageModifyServlet extends HttpServlet {
 					obj.put("status", 1);
 					obj.put("type", 4);
 					obj.put("data", null);
-					obj.put("info", "ºóÌ¨±¨´í"+e.getStackTrace().toString());
+					obj.put("info", "åå°æŠ¥é”™"+e.getStackTrace().toString());
 				}
 				PrintWriter out=response.getWriter();
 				out.write(obj.toJSONString());
@@ -97,7 +97,7 @@ public class MessageModifyServlet extends HttpServlet {
 			obj.put("status", 1);
 			obj.put("type", 3);
 			obj.put("data", null);
-			obj.put("info", "Î´ÊÕµ½ÏûÏ¢id");
+			obj.put("info", "æœªæ”¶åˆ°æ¶ˆæ¯id");
 		}
 		PrintWriter out=response.getWriter();
 		out.write(obj.toJSONString());
@@ -107,117 +107,17 @@ public class MessageModifyServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
+	
+	@Override  
+    public void init() throws ServletException {  
+        // TODO Auto-generated method stub  
+        super.init();  
+        String prefix = getServletContext().getRealPath("/");  
+        String file = getInitParameter("log4j-init-file");  
+        if (file != null) {  
+            System.out.println("read log4j.properties:"+prefix + file);  
+            PropertyConfigurator.configure(prefix + file);  
+        }  
+    } 
 
 }
-=======
-package com.zgj.servlet;
-
-//ĞŞ¸ÄÄ³ÌõÏûÏ¢
-//ËùĞè²ÎÊı:id,
-//¿ÉÑ¡²ÎÊı:msg,fetchLocation,sendLocation
-
-import java.io.IOException;
-import java.io.PrintWriter;
-
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.hibernate.Session;
-import org.json.simple.JSONObject;
-
-import com.zgj.bean.Message;
-import com.zgj.hibernate.HibernateSessionFactory;
-
-@WebServlet("/MessageModifyServlet")
-public class MessageModifyServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-   
-    public MessageModifyServlet() {
-        super();
-    }
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html");
-		response.setCharacterEncoding("UTF-8");
-		
-		String id=request.getParameter("id");
-		String msg=request.getParameter("msg");
-		String fetchLocation=request.getParameter("fetchLocation");
-		String sendLocation=request.getParameter("sendLocation");
-		
-		JSONObject obj=new JSONObject();
-		Session session=null;
-		if(id!=null){
-			try{
-				session=HibernateSessionFactory.getSession();
-				session.beginTransaction();
-				
-				Message message=(Message)session.get(Message.class, Integer.parseInt(id));
-				if(message!=null){
-					String modified="";
-					if(msg!=null){
-						message.setMsg(msg);
-						modified+="msg\t";
-					}
-					if(fetchLocation!=null){
-						message.setFetchLocation(fetchLocation);
-						modified+="fetchLocation\t";
-					}
-					if(sendLocation!=null){
-						message.setSendLocation(sendLocation);
-						modified+="sendLocation\t";
-					}
-					
-					session.flush();
-					
-					obj.put("status", 0);
-					obj.put("type", 3);
-					obj.put("data", null);
-					obj.put("info", "modified:\t"+modified);
-				}
-				else{
-					obj.put("status", 1);
-					obj.put("type", 3);
-					obj.put("data", null);
-					obj.put("info", "Î´²éÑ¯µ½´ËÏûÏ¢");
-				}
-				
-				session.getTransaction().commit();
-				
-			}catch(Exception e){
-				session.getTransaction().rollback();
-				if(obj.isEmpty()){
-					obj.put("status", 1);
-					obj.put("type", 4);
-					obj.put("data", null);
-					obj.put("info", "ºóÌ¨±¨´í"+e.getStackTrace().toString());
-				}
-				PrintWriter out=response.getWriter();
-				out.write(obj.toJSONString());
-				out.close();
-				e.printStackTrace();
-			}finally{
-				HibernateSessionFactory.closeSession();
-			}
-		}
-		else{
-			obj.put("status", 1);
-			obj.put("type", 3);
-			obj.put("data", null);
-			obj.put("info", "Î´ÊÕµ½ÏûÏ¢id");
-		}
-		PrintWriter out=response.getWriter();
-		out.write(obj.toJSONString());
-		out.close();
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
-	}
-
-}
->>>>>>> a244db9743e1a09607ddde6efe917c91a0ead07b

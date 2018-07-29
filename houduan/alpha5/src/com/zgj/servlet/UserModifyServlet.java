@@ -1,9 +1,8 @@
-<<<<<<< HEAD
 package com.zgj.servlet;
 
-//ĞŞ¸ÄÄ³ÓÃ»§ĞÅÏ¢
-//ËùĞè²ÎÊı:stuNum
-//¿ÉÑ¡²ÎÊı:name,defaultLocation,gender,telephone,pay
+//ï¿½Ş¸ï¿½Ä³ï¿½Ã»ï¿½ï¿½ï¿½Ï¢
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½:stuNum
+//ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½:name,defaultLocation,gender,telephone,pay
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.PropertyConfigurator;
 import org.hibernate.Session;
 import org.json.simple.JSONObject;
 
@@ -39,6 +39,9 @@ public class UserModifyServlet extends HttpServlet {
 		String gender=request.getParameter("gender");
 		String telephone=request.getParameter("telephone");
 		String pay=request.getParameter("pay");
+		System.out.println("stuNum:\t"+stuNum);
+		System.out.println("name:\t"+name);
+		System.out.println("defaultLocation:\t"+defaultLocation);
 		
 		JSONObject obj=new JSONObject();
 		Session session=null;
@@ -82,7 +85,7 @@ public class UserModifyServlet extends HttpServlet {
 					obj.put("status", 1);
 					obj.put("type", 4);
 					obj.put("data", null);
-					obj.put("info", "Êı¾İ¿âÖĞÎ´²éÑ¯µ½¸ÃÓÃ»§");
+					obj.put("info", "æœªæŸ¥è¯¢åˆ°æ­¤ç”¨æˆ·");
 				}
 				
 				session.getTransaction().commit();
@@ -93,7 +96,7 @@ public class UserModifyServlet extends HttpServlet {
 					obj.put("status", 1);
 					obj.put("type", 4);
 					obj.put("data", null);
-					obj.put("info", "ºóÌ¨±¨´í"+e.getStackTrace().toString());
+					obj.put("info", "åå°æŠ¥é”™"+e.getStackTrace().toString());
 				}
 				PrintWriter out=response.getWriter();
 				out.write(obj.toJSONString());
@@ -107,7 +110,7 @@ public class UserModifyServlet extends HttpServlet {
 			obj.put("status", 1);
 			obj.put("type", 4);
 			obj.put("data", null);
-			obj.put("info", "Î´ÊÕµ½Ñ§ºÅĞÅÏ¢");
+			obj.put("info", "æœªæ”¶åˆ°å­¦å·");
 		}
 		PrintWriter out=response.getWriter();
 		out.write(obj.toJSONString());
@@ -117,127 +120,17 @@ public class UserModifyServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
+	
+	@Override  
+    public void init() throws ServletException {  
+        // TODO Auto-generated method stub  
+        super.init();  
+        String prefix = getServletContext().getRealPath("/");  
+        String file = getInitParameter("log4j-init-file");  
+        if (file != null) {  
+            System.out.println("read log4j.properties:"+prefix + file);  
+            PropertyConfigurator.configure(prefix + file);  
+        }  
+    } 
 
 }
-=======
-package com.zgj.servlet;
-
-//ĞŞ¸ÄÄ³ÓÃ»§ĞÅÏ¢
-//ËùĞè²ÎÊı:stuNum
-//¿ÉÑ¡²ÎÊı:name,defaultLocation,gender,telephone,pay
-
-import java.io.IOException;
-import java.io.PrintWriter;
-
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.hibernate.Session;
-import org.json.simple.JSONObject;
-
-import com.zgj.bean.User;
-import com.zgj.hibernate.HibernateSessionFactory;
-
-@WebServlet("/UserModify")
-public class UserModifyServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-
-    public UserModifyServlet() {
-        super();
-    }
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html");
-		response.setCharacterEncoding("UTF-8");
-		
-		String stuNum=request.getParameter("stuNum");
-		String name=request.getParameter("name");
-		String defaultLocation=request.getParameter("defaultLocation");
-		String gender=request.getParameter("gender");
-		String telephone=request.getParameter("telephone");
-		String pay=request.getParameter("pay");
-		
-		JSONObject obj=new JSONObject();
-		Session session=null;
-		if(stuNum!=null){
-			try{
-				session=HibernateSessionFactory.getSession();
-				session.beginTransaction();
-				
-				User user=(User)session.get(User.class, stuNum);
-				if(user!=null){
-					String modified="";
-					if(name!=null){
-						user.setName(name);
-						modified+="name\t";
-					}
-					if(defaultLocation!=null){
-						user.setDefaultLocation(defaultLocation);
-						modified+="defaultLocation\t";
-					}
-					if(gender!=null){
-						user.setGender(Boolean.parseBoolean(gender));
-						modified+="gender\t";
-					}
-					if(telephone!=null){
-						user.setTelephone(telephone);
-						modified+="telephone\t";
-					}
-					if(pay!=null){
-						user.setPay(pay);
-						modified+="pay\t";
-					}
-					
-					session.flush();
-					
-					obj.put("status", 0);
-					obj.put("type", 4);
-					obj.put("data", null);
-					obj.put("info", "modified\t"+modified);
-				}
-				else{
-					obj.put("status", 1);
-					obj.put("type", 4);
-					obj.put("data", null);
-					obj.put("info", "Êı¾İ¿âÖĞÎ´²éÑ¯µ½¸ÃÓÃ»§");
-				}
-				
-				session.getTransaction().commit();
-				
-			}catch(Exception e){
-				session.getTransaction().rollback();
-				if(obj.isEmpty()){
-					obj.put("status", 1);
-					obj.put("type", 4);
-					obj.put("data", null);
-					obj.put("info", "ºóÌ¨±¨´í"+e.getStackTrace().toString());
-				}
-				PrintWriter out=response.getWriter();
-				out.write(obj.toJSONString());
-				out.close();
-				e.printStackTrace();
-			}finally{
-				HibernateSessionFactory.closeSession();
-			}
-		}
-		else{
-			obj.put("status", 1);
-			obj.put("type", 4);
-			obj.put("data", null);
-			obj.put("info", "Î´ÊÕµ½Ñ§ºÅĞÅÏ¢");
-		}
-		PrintWriter out=response.getWriter();
-		out.write(obj.toJSONString());
-		out.close();
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
-	}
-
-}
->>>>>>> a244db9743e1a09607ddde6efe917c91a0ead07b

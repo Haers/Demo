@@ -1,8 +1,7 @@
-<<<<<<< HEAD
 package com.zgj.servlet;
 
-//Ìí¼ÓÓÃ»§
-//ËùĞè²ÎÊı:stuNum
+//ï¿½ï¿½ï¿½ï¿½Ã»ï¿½
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½:stuNum
 
 import java.io.IOException;
 
@@ -20,6 +19,8 @@ import com.zgj.bean.*;
 import java.io.PrintWriter;
 
 import org.json.simple.*;
+
+import org.apache.log4j.PropertyConfigurator;
 
 
 @WebServlet("/UserAddServlet")
@@ -56,7 +57,7 @@ public class UserAddServlet extends HttpServlet {
 					obj.put("status", 1);
 					obj.put("type", 4);
 					obj.put("data", null);
-					obj.put("info", "´ËÓÃ»§ÒÑ×¢²á");
+					obj.put("info", "æ­¤ç”¨æˆ·å·²æ³¨å†Œ");
 				}
 			}catch(Exception e){
 				session.getTransaction().rollback();
@@ -64,7 +65,7 @@ public class UserAddServlet extends HttpServlet {
 					obj.put("status", 1);
 					obj.put("type", 4);
 					obj.put("data", null);
-					obj.put("info", "ºóÌ¨±¨´í"+e.getStackTrace().toString());
+					obj.put("info", "åå°æŠ¥é”™"+e.getStackTrace().toString());
 				}
 				PrintWriter out=response.getWriter();
 				out.write(obj.toJSONString());
@@ -78,7 +79,7 @@ public class UserAddServlet extends HttpServlet {
 			obj.put("status", 1);
 			obj.put("type", 4);
 			obj.put("data", null);
-			obj.put("info", "Î´ÊÕµ½Ñ§ºÅĞÅÏ¢");
+			obj.put("info", "æœªæ”¶åˆ°å­¦å·");
 		}
 		PrintWriter out=response.getWriter();
 		out.write(obj.toJSONString());
@@ -88,98 +89,17 @@ public class UserAddServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request,response);
 	}
+	
+	 @Override  
+	    public void init() throws ServletException {  
+	        // TODO Auto-generated method stub  
+	        super.init();  
+	        String prefix = getServletContext().getRealPath("/");  
+	        String file = getInitParameter("log4j-init-file");  
+	        if (file != null) {  
+	            System.out.println("read log4j.properties:"+prefix + file);  
+	            PropertyConfigurator.configure(prefix + file);  
+	        }  
+	    }  
 
 }
-=======
-package com.zgj.servlet;
-
-//Ìí¼ÓÓÃ»§
-//ËùĞè²ÎÊı:stuNum
-
-import java.io.IOException;
-
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.hibernate.Session;
-
-import com.zgj.hibernate.*;
-import com.zgj.bean.*;
-
-import java.io.PrintWriter;
-
-import org.json.simple.*;
-
-
-@WebServlet("/UserAddServlet")
-public class UserAddServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-
-    public UserAddServlet() {
-        super();
-
-    }
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html");
-		response.setCharacterEncoding("UTF-8");
-		
-		String stuNum=request.getParameter("stuNum");
-		
-		JSONObject obj=new JSONObject();
-		Session session=null;
-		if(stuNum!=null){
-			try{
-				session=HibernateSessionFactory.getSession();
-				session.beginTransaction();
-				if(session.get(User.class, stuNum)==null){
-					session.save(new User(stuNum));
-					session.getTransaction().commit();
-					obj.put("status", 0);
-					obj.put("type", 4);
-					obj.put("data", null);
-					obj.put("info", null);
-				}
-				else{
-					obj.put("status", 1);
-					obj.put("type", 4);
-					obj.put("data", null);
-					obj.put("info", "´ËÓÃ»§ÒÑ×¢²á");
-				}
-			}catch(Exception e){
-				session.getTransaction().rollback();
-				if(obj.isEmpty()){
-					obj.put("status", 1);
-					obj.put("type", 4);
-					obj.put("data", null);
-					obj.put("info", "ºóÌ¨±¨´í"+e.getStackTrace().toString());
-				}
-				PrintWriter out=response.getWriter();
-				out.write(obj.toJSONString());
-				out.close();
-				e.printStackTrace();
-			}finally{
-				HibernateSessionFactory.closeSession();
-			}
-		}
-		else{
-			obj.put("status", 1);
-			obj.put("type", 4);
-			obj.put("data", null);
-			obj.put("info", "Î´ÊÕµ½Ñ§ºÅĞÅÏ¢");
-		}
-		PrintWriter out=response.getWriter();
-		out.write(obj.toJSONString());
-		out.close();
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request,response);
-	}
-
-}
->>>>>>> a244db9743e1a09607ddde6efe917c91a0ead07b

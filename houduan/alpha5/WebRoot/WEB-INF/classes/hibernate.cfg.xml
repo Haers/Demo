@@ -6,12 +6,10 @@
 <hibernate-configuration>
 
 	<session-factory>
-		<property name="dialect">
-			org.hibernate.dialect.MySQLDialect
-		</property>
-		<property name="connection.url">jdbc:mysql://localhost:3306/alpha3</property>
+		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="connection.url">jdbc:mysql://localhost:3306/alpha4?useUnicode=true&amp;characterEncoding=UTF-8</property>
 		<property name="connection.username">root</property>
-		<property name="connection.password">123321</property>
+		<property name="connection.password">xi</property>
 		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
 		<property name="myeclipse.connection.profile">Mysql</property>
 		<mapping resource="com/zgj/bean/User.hbm.xml" />
